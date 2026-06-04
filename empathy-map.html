@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empathy Map: CEO of Meridian Retail Group</title>
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  line-height: 1.6;
+  padding: 2rem 1.5rem 4rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.4rem;
+}
+
+header p {
+  font-size: 0.95rem;
+  color: #5a5a7a;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto 2.5rem;
+  overflow: visible;
+  padding: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--accent);
+  position: relative;
+  z-index: 1;
+  transition: transform 200ms ease, box-shadow 200ms ease, z-index 0ms;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+  z-index: 10;
+}
+
+.grid:has(.card:hover) .card:not(:hover) {
+  opacity: 0.72;
+  filter: saturate(0.6);
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 250ms ease, filter 250ms ease;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card li {
+  position: relative;
+  padding: 0.45rem 0 0.45rem 1.1rem;
+  font-size: 0.88rem;
+  color: #2d2d44;
+  line-height: 1.55;
+}
+
+.card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.card li strong {
+  color: #1a1a2e;
+}
+
+/* Accent colors per quadrant */
+.card--says   { --accent: #2563eb; }
+.card--thinks { --accent: #7c3aed; }
+.card--feels  { --accent: #db2777; }
+.card--sees   { --accent: #ea580c; }
+.card--hears  { --accent: #0d9488; }
+.card--does   { --accent: #16a34a; }
+
+/* Pain panel */
+.pain-panel-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  overflow: visible;
+}
+
+.pain-panel {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #f1f5f9;
+  border-radius: 14px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  position: relative;
+  z-index: 1;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  will-change: transform;
+}
+
+.pain-panel:hover {
+  transform: scale(1.025);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+  z-index: 10;
+}
+
+.pain-panel h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fbbf24;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pain-panel .core-pain {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.06);
+  border-left: 4px solid #fbbf24;
+  border-radius: 6px;
+}
+
+.pain-panel .core-pain strong {
+  color: #fbbf24;
+}
+
+.pain-panel h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #e2e8f0;
+}
+
+.pain-panel ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: contra;
+}
+
+.pain-panel ol li {
+  counter-increment: contra;
+  position: relative;
+  padding: 0.6rem 0 0.6rem 2rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.pain-panel ol li::before {
+  content: counter(contra);
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #fbbf24;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pain-panel ol li strong {
+  color: #f8fafc;
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  body {
+    padding: 1.25rem 1rem 3rem;
+  }
+  header h1 {
+    font-size: 1.4rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Empathy Map: CEO of Meridian Retail Group</h1>
+  <p>Understanding the pressures, perceptions, and contradictions facing the CEO as Meridian navigates omnichannel transformation.</p>
+</header>
+
+<div class="grid">
+
+  <!-- SAYS -->
+  <div class="card card--says">
+    <h2>Says</h2>
+    <ul>
+      <li><strong>Strategic urgency:</strong> "Without reinvention, we'll lose an entire generation of customers."</li>
+      <li><strong>Customer experience:</strong> "Our customers still value us, but we are no longer meeting their expectations."</li>
+      <li><strong>Competition:</strong> "Digital-native players are setting the standard, and we are being compared against them every day."</li>
+      <li><strong>Technology:</strong> "We have invested in tools, but we still do not have clear insight."</li>
+      <li><strong>Operations:</strong> "We cannot afford stockouts on bestsellers while carrying excess inventory elsewhere."</li>
+      <li><strong>Employees:</strong> "Our associates are the face of the brand, but we are not enabling them properly."</li>
+      <li><strong>Leadership:</strong> "We need a transformation that delivers results, not another isolated initiative."</li>
+    </ul>
+  </div>
+
+  <!-- THINKS -->
+  <div class="card card--thinks">
+    <h2>Thinks</h2>
+    <ul>
+      <li><strong>Business survival:</strong> "Is this a temporary downturn, or are we becoming structurally irrelevant?"</li>
+      <li><strong>Customer loyalty:</strong> "Have we lost the emotional connection customers once had with Meridian?"</li>
+      <li><strong>Data confidence:</strong> "Can I trust the numbers I am getting from different departments?"</li>
+      <li><strong>Execution risk:</strong> "Even if we know what to fix, can this organization execute fast enough?"</li>
+      <li><strong>Transformation fatigue:</strong> "Have we overwhelmed teams with too many tools and change programs?"</li>
+      <li><strong>Board pressure:</strong> "How do I convince the board this reinvention will produce measurable returns?"</li>
+      <li><strong>Brand identity:</strong> "How do we modernize without losing the reliability and trust Meridian was built on?"</li>
+      <li><strong>Talent risk:</strong> "If employees are disengaged, how can they deliver a better customer experience?"</li>
+    </ul>
+  </div>
+
+  <!-- FEELS -->
+  <div class="card card--feels">
+    <h2>Feels</h2>
+    <ul>
+      <li><strong>Pressure:</strong> revenue, loyalty, market share, and brand perception are all declining at once.</li>
+      <li><strong>Frustration:</strong> many tools and teams, but they are not creating clear business insight.</li>
+      <li><strong>Anxiety:</strong> competitors are moving faster and customer expectations are changing quickly.</li>
+      <li><strong>Accountability:</strong> ultimately responsible for failures across CX, operations, people, and technology.</li>
+      <li><strong>Impatience:</strong> the organization is diagnosing problems too slowly while the market moves quickly.</li>
+      <li><strong>Concern for employees:</strong> associates expected to deliver modern omnichannel service without enough support.</li>
+      <li><strong>Fear of irrelevance:</strong> the biggest fear is Meridian becoming outdated in customers' minds.</li>
+      <li><strong>Determination:</strong> knows reinvention is necessary and wants a credible path forward.</li>
+    </ul>
+  </div>
+
+  <!-- SEES -->
+  <div class="card card--sees">
+    <h2>Sees</h2>
+    <ul>
+      <li>Online conversion falling from 2.8% to 1.4% — digital channels underperforming at a critical time.</li>
+      <li>Negative social sentiment — the brand is losing emotional goodwill.</li>
+      <li>Returns increasing by 36% — weak product info, expectation-setting, and customer confidence.</li>
+      <li>17% of top-selling items frequently out of stock — losing sales on wanted products.</li>
+      <li>Overstock in slow-moving categories — capital trapped in the wrong inventory.</li>
+      <li>Employee turnover at 38% — the frontline experience is unstable.</li>
+      <li>Fragmented customer and loyalty data — can't understand customer value or repeat behavior.</li>
+      <li>Competitors offer personalization, virtual try-on, fast shipping, flexible returns — a newer standard.</li>
+    </ul>
+  </div>
+
+  <!-- HEARS -->
+  <div class="card card--hears">
+    <h2>Hears</h2>
+    <ul>
+      <li><strong>Customers:</strong> "Product information is unclear." "The experience feels inconsistent." "Other retailers are easier."</li>
+      <li><strong>Store associates:</strong> "The systems are confusing." "We are expected to do too much." "Policies are complicated."</li>
+      <li><strong>Store managers:</strong> "We cannot keep good people." "Scheduling is difficult." "Training is not enough."</li>
+      <li><strong>Merchants:</strong> "We cannot plan properly because the data is outdated."</li>
+      <li><strong>Supply chain:</strong> "Inventory and warehouse processes are inconsistent."</li>
+      <li><strong>IT:</strong> "Too many tools but not enough integration or insight."</li>
+      <li><strong>Marketing:</strong> "We cannot personalize effectively because customer data is fragmented."</li>
+      <li><strong>Board / investors:</strong> "What is the turnaround plan? How soon will growth and profitability improve?"</li>
+      <li><strong>Competitors / market:</strong> "Speed, personalization, and convenience are now basic expectations."</li>
+    </ul>
+  </div>
+
+  <!-- DOES -->
+  <div class="card card--does">
+    <h2>Does</h2>
+    <ul>
+      <li>Pushes for reinvention — current model isn't keeping up with customer expectations.</li>
+      <li>Reviews sales, conversion, loyalty, and operational KPIs — to see where performance is breaking down.</li>
+      <li>Challenges functional leaders — wants accountability across stores, eCommerce, supply chain, HR, IT, marketing.</li>
+      <li>Seeks external advisory support — needs an objective view and a practical transformation roadmap.</li>
+      <li>Pursues quick wins plus long-term transformation — needs momentum while solving structural issues.</li>
+      <li>Communicates urgency internally — change is not optional.</li>
+      <li>Balances investment decisions — technology vs. people vs. supply chain vs. CX vs. brand.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- WHERE THE SHOE BITES -->
+<div class="pain-panel-wrapper">
+  <div class="pain-panel">
+    <h2>Where the Shoe Bites</h2>
+    <div class="core-pain">
+      <strong>Core pain:</strong> The CEO is accountable for an entire omnichannel business but does not have a connected, reliable system to understand, control, or improve it fast enough.
+    </div>
+    <h3>Five Contradictions</h3>
+    <ol>
+      <li><strong>Accountability without visibility</strong> — "I am being asked to make enterprise-level decisions with disconnected and outdated information."</li>
+      <li><strong>Modernization without disruption</strong> — "I need to transform the plane while flying it."</li>
+      <li><strong>A trusted brand becoming an outdated brand</strong> — "The brand promise that made us successful may no longer be enough."</li>
+      <li><strong>Employees are both the solution and the bottleneck</strong> — "I need my people to create a better experience, but we have not created a better experience for them."</li>
+      <li><strong>Too many tools, not enough intelligence</strong> — "We have spent money on technology, but we have not converted it into insight, speed, or customer value."</li>
+    </ol>
+  </div>
+</div>
+
+</body>
+</html>
